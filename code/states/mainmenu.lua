@@ -1,7 +1,7 @@
 mainmenu = {}
 
 function mainmenu:enter()
-  
+  state.switch(test)
 end
 
 function mainmenu:draw()

@@ -1,0 +1,202 @@
+function run()
+--[[PatternsFromSample()
+BuildPropagator()
+Loop
+until finished:
+Observe()
+Propagate()
+OutputObservations]]
+  
+  
+end
+
+function isPatternDiscovered(patterns,pattern)
+  local result
+  for i=1, #patterns do
+    result = true
+    for j=0, #pattern-1 do
+      if pattern[j] ~= patterns[i][j] then
+        result = false
+        break
+      end
+    end
+    if result then
+      result = i
+      break
+    end
+  end
+  return result
+end
+
+function getPatterns(input,n) --Wave being potentially the same as coefficient_matrix
+  local patterns = {}
+  local patternDiscovered
+  local w, h = #input, #input[1]
+  for x=1,w do for y=1,h do
+    local currentpattern = {}
+    for dx=0,n-1 do for dy=0,n-1 do
+      local rx, ry
+      if x+dx > w then --For x wrapping
+        rx = dx
+      else
+        rx = x+dx
+      end
+      if y+dy > h then --For y wrapping
+        ry = dy
+      else
+        ry = y+dy
+      end
+      currentpattern[dx*n+dy] = input[rx][ry]
+    end end
+    patternDiscovered = isPatternDiscovered(patterns,currentpattern)
+    if patternDiscovered then
+      patterns[patternDiscovered].frequency = patterns[patternDiscovered].frequency + 1
+    else
+      currentpattern.frequency = 1
+      patterns[#patterns+1] = currentpattern
+    end
+  end end
+  return patterns
+end
+
+function emptyOutputMap(w,h,coefficient_matrix)
+  
+  --Make empty map
+  local map = {}
+  for x=1, w do
+    map[x] = {}
+    for y=1, h do
+      map[y] = {}
+    end
+  end
+end
+
+function observe(coefficient_matrix)
+  findlowestentropy()
+  if contradiction then killmepls() end
+  if allcellsentropy() == 0 then finish() end
+  
+  --[[Choose
+  a pattern by a random sample, weighted by the
+  pattern frequency in the source data
+  Set
+  the boolean array in this cell to false, except
+  for the chosen pattern]]
+end
+
+function findlowestentropy(map)
+--[[Return
+the cell that has the lowest greater-than-zero
+entropy, defined as:
+A cell with one valid pattern has 0 entropy
+A cell with no valid patterns is a contradiction
+Else
+: the entropy is based on the sum of the frequency
+that the patterns appear in the source data, plus
+Use some random noise to break ties and
+near-ties.]]
+  result = {}
+  min_entropy = math.huge
+  for x=1,w do for y=1,h do
+    local pixel = map[x][y]
+    if not pixel.finalvalue then
+      local pixel_entropy = 0
+      for i, v in pairs(pixel.applicableColorFrequencies.values) do
+        pixel_entropy = pixel_entropy + v
+      end
+      if pixel_entropy < min_entropy then
+        result = {{x=x,y=y}}
+      elseif pixel_entropy == min_entropy then
+        result[#result+1] = {x=x,y=y}
+      end
+    end
+    frequency
+  end end
+  
+  return result
+end
+
+function propagate(coefficient_matrix)
+--[[Loop
+until no more cells are left to be update:
+For each neighboring cell:
+  For each pattern that is still potentially valid:
+    Compare this location in the pattern with the cell's values
+      If this point in the pattern no longer matches:
+        Set the array in the wave to false for this pattern
+        Flag this cell as needing to be updated in the next iteration
+  ]]
+  
+end
+
+function oneIteration(map,patterns,n)
+  lowestEntropyPixels = findlowestentropy(map)
+  if #lowestEntropyPixels == 0 then
+    print "fINSIHSIDHED"
+  end
+  currentpixel = lowestEntropyPixels[love.math.random(#lowestEntropyPixels)]
+  
+  --collapse the wave
+  local possiblepatterns = {}
+  for i=1, #patterns do
+    
+    for x=0,n do for y=0,n do
+      map[currentpixel.x][currentpixel.y] 
+      
+    end end
+    
+  end
+  --Check which patterns can be applied at which positions around this pixel.
+    pixel.ApplicableColorFrequencies.Clear();
+    foreach (Pattern pattern in Input.Patterns)
+    {
+      Vector2i patternSize = pattern.Values.SizeXY();
+      var patternPoses = new Vector2i.Iterator(pixelPos - patternSize + 1, pixelPos + 1);
+      foreach (Vector2i patternMinCornerPos in patternPoses)
+      {
+        --See if the pattern can be placed here (and the color this pixel would become isn't blacklisted).
+
+        Vector2i pixelPatternPos = pixelPos - patternMinCornerPos;
+        Color pixelPatternColor = pattern[pixelPatternPos];
+
+        if (!badColors.Contains(pixelPatternColor) &&
+          pattern.DoesFit(patternMinCornerPos, outputColorGetter))
+          {
+            if (!pixel.ApplicableColorFrequencies.ContainsKey(pixelPatternColor))
+              pixel.ApplicableColorFrequencies.Add(pixelPatternColor, 0);
+							pixel.ApplicableColorFrequencies[pixelPatternColor] += pattern.Frequency;
+          
+  
+  
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
